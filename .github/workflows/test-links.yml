@@ -16,15 +16,15 @@ jobs:
     - name: Checkout gh-pages branch
       uses: actions/checkout@v3
       with:
-        ref: gh-pages  # Ensure we're checking out the gh-pages branch
+        ref: gh-pages
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
       with:
-        node-version: '16'  # Specify your Node.js version here
+        ruby-version: '3.1'  # Specify the Ruby version here
 
-    - name: Install LinkChecker
-      run: npm install -g linkchecker
+    - name: Install HTML Proofer
+      run: gem install html-proofer
 
-    - name: Run LinkChecker
-      run: linkchecker dist/index.html --check-extern --file --no-check-certificate
+    - name: Run HTML Proofer
+      run: htmlproofer ./dist --check_css --check_html --disable_external
